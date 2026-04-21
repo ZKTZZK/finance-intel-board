@@ -5,3 +5,7 @@
 Thumbs.db
 Desktop.ini
 .DS_Store
+
+# Root-level backups and loose files (organized copies live in dist/archive/assets/)
+*.bak
+*.json
