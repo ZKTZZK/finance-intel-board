@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>每日经济热点案例展示板 · 2026年4月21日 · V1.1</title>
+  <style>
+    :root {
+      --primary: #1a2942;
+      --accent: #c8102e;
+      --gold: #d4a017;
+      --teal: #0f7173;
+      --green: #1a9e5c;
+      --red: #e63329;
+      --light-bg: #f4f6fb;
+      --card-bg: #ffffff;
+      --border: #e0e6ef;
+      --text-main: #1c2a42;
+      --text-sub: #5a6a80;
+      --shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--light-bg);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+
+    /* ─── HEADER ─── */
+    .header {
+      background: linear-gradient(135deg, #0e1e3a 0%, #1a3464 60%, #0d2137 100%);
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 3px 20px rgba(0,0,0,0.3);
+    }
+    .header-inner {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .header-left { display: flex; align-items: center; gap: 16px; }
+    .header-logo { display: flex; align-items: center; gap: 10px; }
+    .logo-icon {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--accent) 0%, #ff6b35 100%);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 2px 10px rgba(200,16,46,0.4);
+    }
+    .header-title { display: flex; flex-direction: column; }
+    .header-title h1 { font-size: 20px; font-weight: 700; color: #ffffff; letter-spacing: 1px; }
+    .header-title .subtitle { font-size: 12px; color: rgba(255,255,255,0.55); letter-spacing: 0.5px; margin-top: 2px; }
+    .header-meta { display: flex; align-items: center; gap: 18px; }
+    .date-badge {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 8px;
+      padding: 6px 14px;
+      color: #fff; font-size: 13px; font-weight: 500;
+    }
+    .version-badge {
+      background: linear-gradient(135deg, var(--gold), #b8860b);
+      border-radius: 6px;
+      padding: 4px 10px;
+      color: #fff; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .market-status { display: flex; align-items: center; gap: 8px; }
+    .status-dot {
+      width: 8px; height: 8px;
+      background: #22c55e; border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(34,197,94,0.25);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 3px rgba(34,197,94,0.25); }
+      50% { box-shadow: 0 0 0 6px rgba(34,197,94,0.1); }
+    }
+    .status-text { color: #22c55e; font-size: 12px; font-weight: 600; }
+
+    /* ─── TICKER BAR ─── */
+    .ticker-bar {
+      background: #0a1628;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      overflow: hidden;
+      padding: 6px 0;
+    }
+    .ticker-inner {
+      max-width: 1600px; margin: 0 auto; padding: 0 28px;
+      display: flex; gap: 28px; overflow-x: auto; scrollbar-width: none;
+    }
+    .ticker-inner::-webkit-scrollbar { display: none; }
+    .ticker-item { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+    .ticker-label { font-size: 11px; color: rgba(255,255,255,0.45); }
+    .ticker-val { font-size: 13px; font-weight: 700; color: #fff; }
+    .ticker-chg { font-size: 11px; font-weight: 600; }
+    .up { color: var(--red); }
+    .down { color: var(--green); }
+    .neutral { color: rgba(255,255,255,0.6); }
+    .sep { width: 1px; height: 16px; background: rgba(255,255,255,0.1); }
+
+    /* ─── NAV TABS ─── */
+    .nav-tabs {
+      background: #fff;
+      border-bottom: 2px solid var(--border);
+      position: sticky; top: 88px; z-index: 90;
+    }
+    .nav-inner {
+      max-width: 1600px; margin: 0 auto; padding: 0 28px;
+      display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none;
+    }
+    .nav-inner::-webkit-scrollbar { display: none; }
+    .nav-tab {
+      display: flex; align-items: center; gap: 6px;
+      padding: 14px 18px;
+      font-size: 13px; font-weight: 600;
+      color: var(--text-sub);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      white-space: nowrap;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .nav-tab:hover { color: var(--primary); background: #f4f6fb; }
+    .nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .nav-tab .tab-icon { font-size: 16px; }
+    .nav-tab .new-badge {
+      font-size: 9px; font-weight: 800;
+      background: var(--accent); color: #fff;
+      padding: 1px 5px; border-radius: 4px;
+      letter-spacing: 0.3px;
+    }
+
+    /* ─── MAIN CONTENT ─── */
+    .main { max-width: 1600px; margin: 0 auto; padding: 24px 28px 48px; }
+    .section-wrapper { display: none; }
+    .section-wrapper.active { display: block; }
+    html { scroll-behavior: smooth; }
+
+    /* ─── SECTION HEADER ─── */
+    .section-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 20px; padding-bottom: 14px;
+      border-bottom: 2px solid var(--border);
+    }
+    .section-title { display: flex; align-items: center; gap: 12px; }
+    .section-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+    .section-title h2 { font-size: 18px; font-weight: 700; color: var(--primary); }
+    .section-title .section-desc { font-size: 12px; color: var(--text-sub); margin-top: 2px; }
+    .section-badge { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; }
+
+    /* ══════════════════════════════════════════════
+       【一图看懂】板块专属样式 — 手机优先设计
+       ══════════════════════════════════════════════ */
+
+    /* 顶部情绪仪表盘 */
+    .sentiment-bar {
+      background: #fff;
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+    .sentiment-label { font-size: 11px; color: var(--text-sub); margin-bottom: 10px; font-weight: 600; letter-spacing: 0.5px; }
+    .sentiment-track {
+      display: flex; border-radius: 8px; overflow: hidden; height: 10px; margin-bottom: 8px;
+    }
+    .seg-bear { background: var(--green); }
+    .seg-neutral { background: #adb5bd; }
+    .seg-bull { background: var(--red); }
+    .sentiment-tags {
+      display: flex; justify-content: space-between;
+      font-size: 11px; color: var(--text-sub);
+    }
+    .sentiment-today {
+      display: inline-block;
+      margin-top: 10px;
+      background: #fff3cd;
+      border-left: 3px solid var(--gold);
+      padding: 6px 12px;
+      border-radius: 0 8px 8px 0;
+      font-size: 12px; font-weight: 600; color: #7a5500;
+      width: 100%;
+    }
+
+    /* 快速行情数据行 */
+    .quick-market {
+      display: flex; gap: 10px; margin-bottom: 16px; overflow-x: auto; scrollbar-width: none;
+    }
+    .quick-market::-webkit-scrollbar { display: none; }
+    .qm-item {
+      background: #fff;
+      border-radius: 10px;
+      padding: 10px 14px;
+      min-width: 100px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      flex-shrink: 0;
+      text-align: center;
+    }
+    .qm-name { font-size: 10px; color: var(--text-sub); margin-bottom: 4px; }
+    .qm-val { font-size: 16px; font-weight: 800; }
+    .qm-chg { font-size: 10px; font-weight: 600; margin-top: 2px; }
+
+    /* 热点卡片容器 */
+    .hot5-list { display: flex; flex-direction: column; gap: 12px; }
+
+    /* 单张热点卡片 */
+    .hot-card {
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      display: flex;
+      transition: box-shadow 0.2s, transform 0.15s;
+      cursor: pointer;
+    }
+    .hot-card:hover {
+      box-shadow: 0 6px 24px rgba(0,0,0,0.13);
+      transform: translateY(-1px);
+    }
+
+    /* 左色条 */
+    .hc-strip {
+      width: 5px;
+      flex-shrink: 0;
+    }
+
+    /* 卡片主体 */
+    .hc-body {
+      flex: 1;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* 顶行：序号 + 领域标签 + 重要度 */
+    .hc-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hc-num {
+      width: 22px; height: 22px;
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 800; color: #fff;
+      flex-shrink: 0;
+    }
+    .hc-domain {
+      font-size: 11px; font-weight: 700;
+      padding: 2px 8px; border-radius: 10px;
+    }
+    .hc-importance {
+      margin-left: auto;
+      font-size: 10px; font-weight: 700;
+      padding: 2px 7px; border-radius: 8px;
+    }
+
+    /* 一句话结论 */
+    .hc-headline {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.45;
+    }
+
+    /* 核心数据区 */
+    .hc-metrics {
+      display: flex;
+      gap: 12px;
+    }
+    .hc-metric {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .hc-metric-val {
+      font-size: 22px;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+    }
+    .hc-metric-label {
+      font-size: 10px;
+      color: var(--text-sub);
+      margin-top: 2px;
+    }
+
+    /* 谈资金句 */
+    .hc-quote {
+      background: #f8f9fc;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 12px;
+      color: #3a4a60;
+      line-height: 1.55;
+      border-left: 3px solid #dde3f0;
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+    }
+    .hc-quote-icon { flex-shrink: 0; font-size: 13px; margin-top: 1px; }
+
+    /* 底部操作行 */
+    .hc-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .hc-detail-btn {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 3px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: #fce8e6;
+      cursor: pointer;
+      border: none;
+      transition: background 0.15s;
+    }
+    .hc-detail-btn:hover { background: #f9d0cd; }
+
+    /* 底部今日行动建议 */
+    .action-suggestion {
+      background: linear-gradient(135deg, #1a2942 0%, #1a3464 100%);
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-top: 16px;
+      color: #fff;
+    }
+    .as-title {
+      font-size: 12px; font-weight: 700;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 12px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .as-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .as-item {
+      background: rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 10px 12px;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .as-item-label { font-size: 10px; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+    .as-item-content { font-size: 12px; color: rgba(255,255,255,0.9); line-height: 1.5; }
+    .as-disclaimer {
+      margin-top: 10px;
+      font-size: 10px;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+    }
+
+    /* 桌面端最大宽度限制（保持手机视觉风格） */
+    .snappy-container {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    @media (min-width: 700px) {
+      .snappy-container {
+        max-width: 540px;
+      }
+    }
+
+    /* ─── 原有板块卡片样式 ─── */
+    .topic-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      margin-bottom: 32px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: box-shadow 0.2s;
+    }
+    .topic-card:hover { box-shadow: 0 6px 30px rgba(0,0,0,0.12); }
+    .card-strip { height: 5px; }
+    .card-body { padding: 24px; }
+    .card-title-row { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 18px; }
+    .card-num {
+      min-width: 36px; height: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 800; color: #fff; flex-shrink: 0;
+    }
+    .card-title-info { flex: 1; }
+    .card-title-info h3 { font-size: 16px; font-weight: 700; color: var(--primary); line-height: 1.4; }
+    .card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .tag { font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 12px; }
+
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 1200px) { .modules-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 700px) { .modules-grid { grid-template-columns: 1fr; } }
+
+    .module-box {
+      border-radius: 12px; padding: 16px;
+      border: 1px solid var(--border);
+      background: #fafbfd; position: relative;
+    }
+    .module-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+    .module-icon {
+      width: 28px; height: 28px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; font-size: 14px;
+    }
+    .module-title { font-size: 12px; font-weight: 700; color: var(--text-sub); text-transform: uppercase; letter-spacing: 0.5px; }
+    .module-num { font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 6px; background: rgba(0,0,0,0.06); color: var(--text-sub); }
+
+    .module-news .module-icon { background: #e8f0fe; }
+    .module-news { border-top: 3px solid #4285f4; }
+    .news-summary { font-size: 13px; color: var(--text-main); line-height: 1.7; }
+    .news-highlight {
+      display: inline-block; background: #fff3cd;
+      border-left: 3px solid var(--gold);
+      padding: 8px 12px; border-radius: 0 6px 6px 0;
+      font-size: 12px; color: #7a5500; margin-top: 10px; width: 100%; line-height: 1.5;
+    }
+    .module-metrics .module-icon { background: #e8f5e9; }
+    .module-metrics { border-top: 3px solid var(--green); }
+    .metrics-list { display: flex; flex-direction: column; gap: 8px; }
+    .metric-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 7px 10px; background: #fff; border-radius: 8px; border: 1px solid var(--border);
+    }
+    .metric-name { font-size: 12px; color: var(--text-sub); }
+    .metric-val { font-size: 14px; font-weight: 700; }
+    .metric-chg { font-size: 11px; font-weight: 600; padding: 2px 6px; border-radius: 4px; }
+    .val-up { color: var(--red); }
+    .val-down { color: var(--green); }
+    .val-neutral { color: var(--text-sub); }
+    .chg-up { background: #fce8e6; color: var(--red); }
+    .chg-down { background: #e6f4ea; color: var(--green); }
+    .chg-neutral { background: #f0f0f0; color: var(--text-sub); }
+
+    .module-analysis .module-icon { background: #fff3e0; }
+    .module-analysis { border-top: 3px solid #ff9800; }
+    .analysis-content { font-size: 13px; color: var(--text-main); line-height: 1.7; }
+    .analysis-actions { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+    .action-item {
+      display: flex; align-items: flex-start; gap: 8px;
+      padding: 8px 10px; border-radius: 8px; background: #fff; border: 1px solid var(--border);
+      font-size: 12px; line-height: 1.5;
+    }
+    .action-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+    .institution-label {
+      display: inline-block; font-size: 10px; font-weight: 700;
+      padding: 1px 6px; border-radius: 4px; margin-right: 4px;
+    }
+    .module-tips .module-icon { background: #f3e8ff; }
+    .module-tips { border-top: 3px solid #9c27b0; }
+    .tip-list { display: flex; flex-direction: column; gap: 7px; }
+    .tip-item {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 12px; line-height: 1.6;
+      padding: 8px 10px; background: #fff; border-radius: 8px; border: 1px solid #e8d5f5;
+    }
+    .tip-bullet {
+      width: 18px; height: 18px; border-radius: 50%;
+      background: #9c27b0; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+    }
+    .tip-caution {
+      display: flex; align-items: flex-start; gap: 8px; margin-top: 8px;
+      padding: 8px 10px; background: #fff8e1; border-radius: 8px;
+      border-left: 3px solid #ff9800; font-size: 11px; color: #7a5000;
+    }
+
+    .summary-panel {
+      background: linear-gradient(135deg, #1a2942 0%, #1a3464 100%);
+      border-radius: 16px; padding: 24px; margin-bottom: 24px; color: #fff;
+    }
+    .summary-title { font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.7); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    @media (max-width: 900px) { .summary-grid { grid-template-columns: repeat(2, 1fr); } }
+    .summary-item { background: rgba(255,255,255,0.08); border-radius: 12px; padding: 16px; border: 1px solid rgba(255,255,255,0.12); }
+    .summary-item .label { font-size: 11px; color: rgba(255,255,255,0.55); }
+    .summary-item .value { font-size: 22px; font-weight: 800; margin: 6px 0; }
+    .summary-item .detail { font-size: 11px; }
+
+    /* ─── FOOTER ─── */
+    .footer { background: #fff; border-top: 1px solid var(--border); padding: 16px 28px; margin-top: 32px; }
+    .footer-inner {
+      max-width: 1600px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 11px; color: var(--text-sub); flex-wrap: wrap; gap: 8px;
+    }
+    .footer-disclaimer {
+      background: #fff8e1; border-radius: 6px; padding: 4px 10px;
+      border-left: 3px solid var(--gold); font-size: 11px; color: #7a5500;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header class="header">
+  <div class="header-inner">
+    <div class="header-left">
+      <div class="header-logo">
+        <div class="logo-icon">📊</div>
+        <div class="header-title">
+          <h1>每日经济热点案例展示板</h1>
+          <div class="subtitle">银行直营客户经理 · 每日资讯工作流系统</div>
+        </div>
+      </div>
+    </div>
+    <div class="header-meta">
+      <span class="version-badge">V 1.1</span>
+      <div class="date-badge">📅 2026年4月21日 &nbsp;|&nbsp; 周二</div>
+      <div class="market-status">
+        <div class="status-dot"></div>
+        <span class="status-text">今日数据</span>
+      </div>
+    </div>
+  </div>
+  <!-- Ticker Bar -->
+  <div class="ticker-bar">
+    <div class="ticker-inner">
+      <div class="ticker-item">
+        <span class="ticker-label">沪指</span>
+        <span class="ticker-val">4085.20</span>
+        <span class="ticker-chg up">▲ +0.07%</span>
+      </div>
+      <div class="sep"></div>
+      <div class="ticker-item">
+        <span class="ticker-label">深成指</span>
+        <span class="ticker-val">15016.03</span>
+        <span class="ticker-chg up">▲ +0.10%</span>
+      </div>
+      <div class="sep"></div>
+      <div class="ticker-item">
+        <span class="ticker-label">创业板指</span>
+        <span class="ticker-val">3689.10</span>
+        <span class="ticker-chg up">▲ +0.31%</span>
+      </div>
+      <div class="sep"></div>
+      <div class="ticker-item">
+        <span class="ticker-label">科创50</span>
+        <span class="ticker-val">1450.52</span>
+        <span class="ticker-chg up">▲ +1.91%</span>
+      </div>
+      <div class="sep"></div>
+      <div class="ticker-item">
+        <span class="ticker-label">布伦特原油</span>
+        <span class="ticker-val">$96.8</span>
+        <span class="ticker-chg down">▼ -2.6%</span>
+      </div>
+      <div class="sep"></div>
+      <div class="ticker-item">
+        <span class="ticker-label">1年期LPR</span>
+        <span class="ticker-val">3.0%</span>
+        <span class="ticker-chg neutral">— 维持</span>
+      </div>
+      <div class="sep"></div>
+      <div class="ticker-item">
+        <span class="ticker-label">5年期LPR</span>
+        <span class="ticker-val">3.5%</span>
+        <span class="ticker-chg neutral">— 维持</span>
+      </div>
+      <div class="sep"></div>
+      <div class="ticker-item">
+        <span class="ticker-label">成交额</span>
+        <span class="ticker-val">2.43万亿</span>
+        <span class="ticker-chg down">▼ 缩量</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════ NAV TABS ═══════════════ -->
+<nav class="nav-tabs">
+  <div class="nav-inner">
+    <a class="nav-tab active" href="#" onclick="return showSection('snap',this)">
+      <span class="tab-icon">⚡</span> 一图看懂 <span class="new-badge">NEW</span>
+    </a>
+    <a class="nav-tab" href="#" onclick="return showSection('macro',this)"><span class="tab-icon">🌐</span> 宏观·政策</a>
+    <a class="nav-tab" href="#" onclick="return showSection('tech',this)"><span class="tab-icon">💻</span> 科技·AI算力</a>
+    <a class="nav-tab" href="#" onclick="return showSection('global',this)"><span class="tab-icon">⚡</span> 地缘·大宗</a>
+    <a class="nav-tab" href="#" onclick="return showSection('realestate',this)"><span class="tab-icon">🏠</span> 楼市·地产</a>
+    <a class="nav-tab" href="#" onclick="return showSection('consumer',this)"><span class="tab-icon">🛍️</span> 消费·电力</a>
+  </div>
+</nav>
+
+<!-- ═══════════════ MAIN CONTENT ═══════════════ -->
+<main class="main">
+
+  <!-- ══════════════════════════════════════
+       【一图看懂】板块 — 默认首页
+       ══════════════════════════════════════ -->
+  <div id="sec-snap" class="section-wrapper active">
+    <div class="section-header">
+      <div class="section-title">
+        <div class="section-icon" style="background:linear-gradient(135deg,#c8102e,#ff6b35);">⚡</div>
+        <div>
+          <h2>一图看懂 · 今日5大热点</h2>
+          <div class="section-desc">2026年4月21日 · 08:00更新 · 30秒掌握今日谈资</div>
+        </div>
+      </div>
+      <span class="section-badge" style="background:#fce8e6;color:#c0392b;">📱 手机优先</span>
+    </div>
+
+    <div class="snappy-container">
+
+      <!-- 市场情绪仪表盘 -->
+      <div class="sentiment-bar">
+        <div class="sentiment-label">📊 今日市场情绪仪表盘</div>
+        <div class="sentiment-track">
+          <div class="seg-bear" style="width:15%;"></div>
+          <div class="seg-neutral" style="width:30%;"></div>
+          <div class="seg-bull" style="width:55%;"></div>
+        </div>
+        <div class="sentiment-tags">
+          <span>😰 悲观 15%</span>
+          <span>😐 中性 30%</span>
+          <span>😊 乐观 55%</span>
+        </div>
+        <div class="sentiment-today">
+          💡 今日定调：结构性偏强，AI算力+电力主线延续，震荡中寻机会
+        </div>
+      </div>
+
+      <!-- 快速行情 -->
+      <div class="quick-market">
+        <div class="qm-item">
+          <div class="qm-name">沪指</div>
+          <div class="qm-val up">4085</div>
+          <div class="qm-chg up">▲ +0.07%</div>
+        </div>
+        <div class="qm-item">
+          <div class="qm-name">创业板</div>
+          <div class="qm-val up">3689</div>
+          <div class="qm-chg up">▲ +0.31%</div>
+        </div>
+        <div class="qm-item">
+          <div class="qm-name">科创50</div>
+          <div class="qm-val up">1451</div>
+          <div class="qm-chg up">▲ +1.91%</div>
+        </div>
+        <div class="qm-item">
+          <div class="qm-name">原油</div>
+          <div class="qm-val down">$96.8</div>
+          <div class="qm-chg down">▼ -2.6%</div>
+        </div>
+        <div class="qm-item">
+          <div class="qm-name">LPR 5Y</div>
+          <div class="qm-val neutral">3.5%</div>
+          <div class="qm-chg neutral">— 维持</div>
+        </div>
+      </div>
+
+      <!-- 5条热点卡片 -->
+      <div class="hot5-list">
+
+        <!-- 热点 ① 宏观·政策 -->
+        <div class="hot-card" onclick="return showSection('macro', document.querySelectorAll('.nav-tab')[1])">
+          <div class="hc-strip" style="background:#4285f4;"></div>
+          <div class="hc-body">
+            <div class="hc-top">
+              <div class="hc-num" style="background:#4285f4;">①</div>
+              <span class="hc-domain" style="background:#e8f0fe;color:#1a56db;">🌐 宏观·政策</span>
+              <span class="hc-importance" style="background:#fce8e6;color:#c0392b;">🔴 重磅</span>
+            </div>
+            <div class="hc-headline">一季度GDP增速5.0%，全国政协召开宏观形势座谈会，经济"良好开局"获官方确认</div>
+            <div class="hc-metrics">
+              <div class="hc-metric">
+                <div class="hc-metric-val up">5.0%</div>
+                <div class="hc-metric-label">Q1 GDP增速</div>
+              </div>
+              <div class="hc-metric">
+                <div class="hc-metric-val" style="color:#4285f4;">3.0%</div>
+                <div class="hc-metric-label">1年期LPR（连续11月不变）</div>
+              </div>
+            </div>
+            <div class="hc-quote">
+              <span class="hc-quote-icon">💬</span>
+              <span>"今年一季度数据很不错，GDP到了5%，政策导向很明确，整体经济基本面稳健，对咱们的资产配置是个正面信号。"</span>
+            </div>
+            <div class="hc-footer">
+              <span class="hc-detail-btn">详细分析 →</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 热点 ② 科技·AI算力 -->
+        <div class="hot-card" onclick="return showSection('tech', document.querySelectorAll('.nav-tab')[2])">
+          <div class="hc-strip" style="background:#00bcd4;"></div>
+          <div class="hc-body">
+            <div class="hc-top">
+              <div class="hc-num" style="background:#00bcd4;">②</div>
+              <span class="hc-domain" style="background:#e0f7fa;color:#006d77;">💻 科技·AI算力</span>
+              <span class="hc-importance" style="background:#fff3e0;color:#e65100;">🟠 关注</span>
+            </div>
+            <div class="hc-headline">谷歌Cloud Next'26大会明日开幕，新一代TPU架构+AI算力革命在即，A股相关链全线活跃</div>
+            <div class="hc-metrics">
+              <div class="hc-metric">
+                <div class="hc-metric-val up">+1.91%</div>
+                <div class="hc-metric-label">科创50今日涨幅</div>
+              </div>
+              <div class="hc-metric">
+                <div class="hc-metric-val" style="color:#00bcd4;">4年新高</div>
+                <div class="hc-metric-label">深证成指创逾4年新高</div>
+              </div>
+            </div>
+            <div class="hc-quote">
+              <span class="hc-quote-icon">💬</span>
+              <span>"谷歌明天有个AI大会，国内算力相关的公司今天都在涨，这个赛道的逻辑是长期的——AI越卷，算力越稀缺。"</span>
+            </div>
+            <div class="hc-footer">
+              <span class="hc-detail-btn">详细分析 →</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 热点 ③ 地缘·大宗 -->
+        <div class="hot-card" onclick="return showSection('global', document.querySelectorAll('.nav-tab')[3])">
+          <div class="hc-strip" style="background:#ff9800;"></div>
+          <div class="hc-body">
+            <div class="hc-top">
+              <div class="hc-num" style="background:#ff9800;">③</div>
+              <span class="hc-domain" style="background:#fff3e0;color:#e65100;">⚡ 地缘·大宗</span>
+              <span class="hc-importance" style="background:#fff3e0;color:#e65100;">⚠️ 风险</span>
+            </div>
+            <div class="hc-headline">中东紧张局势阶段缓和，布油回落至$96.8，但霍尔木兹博弈仍未终止，需保持警惕</div>
+            <div class="hc-metrics">
+              <div class="hc-metric">
+                <div class="hc-metric-val down">$96.8</div>
+                <div class="hc-metric-label">布油（较峰值回落）</div>
+              </div>
+              <div class="hc-metric">
+                <div class="hc-metric-val down">-2.6%</div>
+                <div class="hc-metric-label">今日跌幅</div>
+              </div>
+            </div>
+            <div class="hc-quote">
+              <span class="hc-quote-icon">💬</span>
+              <span>"油价比上周高峰时回落了，但中东那边还没完全稳定，这种地缘风险的不确定性，会让市场整体谨慎，投资分散配置更重要。"</span>
+            </div>
+            <div class="hc-footer">
+              <span class="hc-detail-btn">详细分析 →</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 热点 ④ 楼市·地产 -->
+        <div class="hot-card" onclick="return showSection('realestate', document.querySelectorAll('.nav-tab')[4])">
+          <div class="hc-strip" style="background:#9c27b0;"></div>
+          <div class="hc-body">
+            <div class="hc-top">
+              <div class="hc-num" style="background:#9c27b0;">④</div>
+              <span class="hc-domain" style="background:#f3e8ff;color:#7b1fa2;">🏠 楼市·地产</span>
+              <span class="hc-importance" style="background:#e6f4ea;color:#1a7a3d;">🟢 利好</span>
+            </div>
+            <div class="hc-headline">LPR连续11个月不变，5年期维持3.5%低位，按揭成本持续优惠，楼市小阳春信心延续</div>
+            <div class="hc-metrics">
+              <div class="hc-metric">
+                <div class="hc-metric-val" style="color:#9c27b0;">3.5%</div>
+                <div class="hc-metric-label">5年期LPR（历史低位）</div>
+              </div>
+              <div class="hc-metric">
+                <div class="hc-metric-val up">11月</div>
+                <div class="hc-metric-label">连续不变时长</div>
+              </div>
+            </div>
+            <div class="hc-quote">
+              <span class="hc-quote-icon">💬</span>
+              <span>"按揭利率稳定在历史低位，对于有购房需求的客户，现在贷款成本是近几年较低水平，这个时间窗口值得关注。"</span>
+            </div>
+            <div class="hc-footer">
+              <span class="hc-detail-btn">详细分析 →</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 热点 ⑤ 消费·电力 -->
+        <div class="hot-card" onclick="return showSection('consumer', document.querySelectorAll('.nav-tab')[5])">
+          <div class="hc-strip" style="background:#ffc107;"></div>
+          <div class="hc-body">
+            <div class="hc-top">
+              <div class="hc-num" style="background:#e6a800; color:#fff;">⑤</div>
+              <span class="hc-domain" style="background:#fff9c4;color:#f57f17;">🛍️ 消费·电力</span>
+              <span class="hc-importance" style="background:#e8f0fe;color:#1a56db;">📊 数据</span>
+            </div>
+            <div class="hc-headline">一季度全社会用电量+5.2%，AI数据中心用电激增44%，电力板块涨幅居前，华电辽能等涨停</div>
+            <div class="hc-metrics">
+              <div class="hc-metric">
+                <div class="hc-metric-val up">+5.2%</div>
+                <div class="hc-metric-label">Q1全社会用电量同比</div>
+              </div>
+              <div class="hc-metric">
+                <div class="hc-metric-val up">+44%</div>
+                <div class="hc-metric-label">互联网数据服务用电量</div>
+              </div>
+            </div>
+            <div class="hc-quote">
+              <span class="hc-quote-icon">💬</span>
+              <span>"用电量增长说明经济活动在加速，特别是AI数据中心用电量涨了44%，从电力这个'经济晴雨表'来看，趋势是向上的。"</span>
+            </div>
+            <div class="hc-footer">
+              <span class="hc-detail-btn">详细分析 →</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end hot5-list -->
+
+      <!-- 今日行动建议 -->
+      <div class="action-suggestion">
+        <div class="as-title">📋 今日客户拜访参考建议</div>
+        <div class="as-grid">
+          <div class="as-item">
+            <div class="as-item-label">✅ 适合话题</div>
+            <div class="as-item-content">GDP数据亮眼 / 按揭利率低位 / AI产业链机会 / 电力稳增</div>
+          </div>
+          <div class="as-item">
+            <div class="as-item-label">⚠️ 谨慎话题</div>
+            <div class="as-item-content">中东地缘风险 / 市场短期波动 / 油价走势预测</div>
+          </div>
+          <div class="as-item">
+            <div class="as-item-label">💡 开场白参考</div>
+            <div class="as-item-content">"今天一季度经济数据很好，GDP5%，市场挺稳的…"</div>
+          </div>
+          <div class="as-item">
+            <div class="as-item-label">🔔 合规提醒</div>
+            <div class="as-item-content">谈资切入后需基于客户风险偏好引导，不得承诺收益</div>
+          </div>
+        </div>
+        <div class="as-disclaimer">⚠️ 本内容仅供内部参考，不构成投资建议，请遵守合规要求</div>
+      </div>
+
+    </div><!-- end snappy-container -->
+  </div>
+
+  <!-- ─────── 宏观·政策 ─────── -->
+  <div id="sec-macro" class="section-wrapper">
+    <div class="section-header">
+      <div class="section-title">
+        <div class="section-icon" style="background:#e8f0fe;">🌐</div>
+        <div>
+          <h2>宏观经济 · 政策信号</h2>
+          <div class="section-desc">一季度GDP增速5%确认良好开局，全国政协宏观座谈会释放积极信号</div>
+        </div>
+      </div>
+      <span class="section-badge" style="background:#e8f0fe;color:#1a56db;">📌 今日重磅</span>
+    </div>
+
+    <div class="summary-panel">
+      <div class="summary-title">📈 一季度宏观核心指标速览</div>
+      <div class="summary-grid">
+        <div class="summary-item">
+          <div class="label">GDP增速</div>
+          <div class="value" style="color:#ffd700;">5.0%</div>
+          <div class="detail" style="color:rgba(255,255,255,0.6);">高于全年目标线4.5%</div>
+        </div>
+        <div class="summary-item">
+          <div class="label">1年期LPR</div>
+          <div class="value" style="color:#ff6b6b;">3.0%</div>
+          <div class="detail" style="color:rgba(255,255,255,0.6);">连续11个月不变</div>
+        </div>
+        <div class="summary-item">
+          <div class="label">5年期LPR</div>
+          <div class="value" style="color:#ffd700;">3.5%</div>
+          <div class="detail" style="color:rgba(255,255,255,0.6);">历史较低水平，按揭利好</div>
+        </div>
+        <div class="summary-item">
+          <div class="label">农村居民可支配收入</div>
+          <div class="value" style="color:#69db7c;">+5.4%</div>
+          <div class="detail" style="color:rgba(255,255,255,0.6);">城乡差距继续收窄</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <div class="card-strip" style="background:linear-gradient(90deg,#4285f4,#34a853);"></div>
+      <div class="card-body">
+        <div class="card-title-row">
+          <div class="card-num" style="background:linear-gradient(135deg,#4285f4,#1557b0);">01</div>
+          <div class="card-title-info">
+            <h3>一季度GDP增速5.0%，全国政协宏观座谈会召开，下半年LPR降息窗口有望开启</h3>
+            <div class="card-tags">
+              <span class="tag" style="background:#e8f0fe;color:#1a56db;">宏观经济</span>
+              <span class="tag" style="background:#e6f4ea;color:#1a7a3d;">LPR政策</span>
+              <span class="tag" style="background:#fff3e0;color:#e65100;">十五五开局</span>
+            </div>
+          </div>
+        </div>
+        <div class="modules-grid">
+          <div class="module-box module-news">
+            <div class="module-header">
+              <div class="module-icon">📰</div>
+              <span class="module-title">消息摘要</span>
+              <span class="module-num">①</span>
+            </div>
+            <div class="news-summary">
+              国家统计局数据显示：<strong>2026年一季度GDP增速5.0%</strong>，高于全年目标4.5%，实现"十五五"开局良好。主要指标增速回升，新动能快速成长。<br><br>
+              4月21日，全国政协召开2026年第一季度宏观经济形势分析座谈会，委员建议围绕"十五五"战略目标增强宏观政策前瞻性。与此同时，<strong>4月LPR连续11个月维持不变</strong>（1年期3.0%，5年期3.5%），分析师预计下半年存在降息窗口。
+            </div>
+            <div class="news-highlight">
+              💡 关键：经济"良好开局"获高层确认，LPR低位稳定为实体经济和楼市提供持续支撑
+            </div>
+          </div>
+          <div class="module-box module-metrics">
+            <div class="module-header">
+              <div class="module-icon">📊</div>
+              <span class="module-title">关键指标</span>
+              <span class="module-num">②</span>
+            </div>
+            <div class="metrics-list">
+              <div class="metric-item">
+                <span class="metric-name">Q1 GDP增速</span>
+                <span class="metric-val val-up">5.0%</span>
+                <span class="metric-chg chg-up">超目标线</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-name">1年期LPR</span>
+                <span class="metric-val val-neutral">3.0%</span>
+                <span class="metric-chg chg-neutral">连续11月</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-name">5年期LPR</span>
+                <span class="metric-val val-neutral">3.5%</span>
+                <span class="metric-chg chg-neutral">历史低位</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-name">农村居民收入</span>
+                <span class="metric-val val-up">+5.4%</span>
+                <span class="metric-chg chg-up">高于城镇</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-name">高技术制造业用电</span>
+                <span class="metric-val val-up">+8.6%</span>
+                <span class="metric-chg chg-up">新质生产力</span>
+              </div>
+            </div>
+          </div>
+          <div class="module-box module-analysis">
+            <div class="module-header">
+              <div class="module-icon">🏦</div>
+              <span class="module-title">专业分析</span>
+              <span class="module-num">③</span>
+            </div>
+            <div class="analysis-content">GDP超目标+政策连续稳定，机构对全年经济判断趋于乐观：</div>
+            <div class="analysis-actions">
+              <div class="action-item">
+                <span class="action-icon">🏛️</span>
+                <span><span class="institution-label" style="background:#fce8e6;color:#c0392b;">东方金诚</span>LPR年初以来"按兵不动"因经济基本面扎实；下半年若通胀压力下降，降息概率增大</span>
+              </div>
+              <div class="action-item">
+                <span class="action-icon">📈</span>
+                <span><span class="institution-label" style="background:#e8f0fe;color:#1a56db;">瑞银证券</span>全年A股盈利增速将进一步提升，宏观稳增长背景下权益资产配置价值凸显</span>
+              </div>
+              <div class="action-item">
+                <span class="action-icon">💡</span>
+                <span><span class="institution-label" style="background:#e6f4ea;color:#1a7a3d;">全国政协</span>建议增强宏观政策前瞻性，统筹国内外双循环，重点推进十五五战略目标落地</span>
+              </div>
+            </div>
+          </div>
+          <div class="module-box module-tips">
+            <div class="module-header">
+              <div class="module-icon">💬</div>
+              <span class="module-title">客户谈资</span>
+              <span class="module-num">④</span>
+            </div>
+            <div class="tip-list">
+              <div class="tip-item">
+                <div class="tip-bullet">1</div>
+                <span>今天政协刚开了宏观形势座谈会，官方对一季度经济定性为"良好开局"，GDP到了5%，超了全年目标，基本面非常扎实。</span>
+              </div>
+              <div class="tip-item">
+                <div class="tip-bullet">2</div>
+                <span>LPR连续11个月不变，说明货币政策非常稳定，企业和居民的融资成本保持低位，对实体经济是个很大的支持。</span>
+              </div>
+              <div class="tip-item">
+                <div class="tip-bullet">3</div>
+                <span>下半年市场预期LPR还有降息空间，如果您手里有贷款规划，可以关注一下利率窗口，或者谈谈理财产品的配置策略。</span>
+              </div>
+            </div>
+            <div class="tip-caution">
+              ⚠️ <span>勿过度解读政策走向，以"稳"为核心基调引导，保持专业客观</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────── 科技·AI算力 ─────── -->
+  <div id="sec-tech" class="section-wrapper">
+    <div class="section-header">
+      <div class="section-title">
+        <div class="section-icon" style="background:#e0f7fa;">💻</div>
+        <div>
+          <h2>科技 · AI算力</h2>
+          <div class="section-desc">谷歌Cloud Next'26大会在即，电子化学品继续拉升，深成指续创4年新高</div>
+        </div>
+      </div>
+      <span class="section-badge" style="background:#e0f7fa;color:#006d77;">🔥 今日主线</span>
+    </div>
+
+    <div class="topic-card">
+      <div class="card-strip" style="background:linear-gradient(90deg,#00bcd4,#1a9e5c);"></div>
+      <div class="card-body">
+        <div class="card-title-row">
+          <div class="card-num" style="background:linear-gradient(135deg,#00bcd4,#006d77);">02</div>
+          <div class="card-title-info">
+            <h3>谷歌Cloud Next'26明日开幕，新一代TPU+OCS光交换机引爆算力革命，A股产业链全线活跃</h3>
+            <div class="card-tags">
+              <span class="tag" style="background:#e0f7fa;color:#006d77;">AI算力</span>
+              <span class="tag" style="background:#e8f0fe;color:#1a56db;">光通信</span>
+              <span class="tag" style="background:#fff3e0;color:#e65100;">PCB/液冷</span>
+            </div>
+          </div>
+        </div>
+        <div class="modules-grid">
+          <div class="module-box module-news">
+            <div class="module-header">
+              <div class="module-icon">📰</div>
+              <span class="module-title">消息摘要</span>
+              <span class="module-num">①</span>
+            </div>
+            <div class="news-summary">
+              谷歌Cloud Next 2026将于<strong>4月22-24日</strong>在拉斯维加斯举行，大会聚焦<strong>AI+云基础设施</strong>四大方向：企业级智能体、Gemini企业化、算力底层革新（新一代TPU v8+OCS光路交换机）、行业落地。<br><br>
+              A股今日深证成指续创逾4年新高，<strong>电子化学品板块继续拉升</strong>（方邦股份、华特气体20cm涨停），商业航天、光纤、液冷服务器概念活跃，科创50指数涨1.91%。
+            </div>
+            <div class="news-highlight">
+              💡 关键：国产AI算力供应链已深度嵌入谷歌核心供应链，光通信/PCB/液冷为A股三条主线
+            </div>
+          </div>
+          <div class="module-box module-metrics">
+            <div class="module-header">
+              <div class="module-icon">📊</div>
+              <span class="module-title">关键指标</span>
+              <span class="module-num">②</span>
+            </div>
+            <div class="metrics-list">
+              <div class="metric-item">
+                <span class="metric-name">科创50指数</span>
+                <span class="metric-val val-up">1450.52</span>
+                <span class="metric-chg chg-up">+1.91%</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-name">深证成指</span>
+                <span class="metric-val val-up">15016.03</span>
+                <span class="metric-chg chg-up">4年新高</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-name">方邦股份</span>
+                <span class="metric-val val-up">20CM涨停</span>
+                <span class="metric-chg chg-up">电子化学</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-name">华特气体</span>
+                <span class="metric-val val-up">20CM涨停</span>
+                <span class="metric-chg chg-up">半导体气体</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-name">AI数据中心用电量</span>
+                <span class="metric-val val-up">+44%</span>
+                <span class="metric-chg chg-up">Q1同比</span>
+              </div>
+            </div>
+          </div>
+          <div class="module-box module-analysis">
+            <div class="module-header">
+              <div class="module-icon">🏦</div>
+              <span class="module-title">专业分析</span>
+              <span class="module-num">③</span>
+            </div>
+            <div class="analysis-content">谷歌大会是近期最重要的AI产业催化剂，机构布局明确：</div>
+            <div class="analysis-actions">
+              <div class="action-item">
+                <span class="action-icon">💡</span>
+                <span><span class="institution-label" style="background:#e0f7fa;color:#006d77;">多家机构</span>重点推荐谷歌产业链：光通信（光模块/光纤）、PCB（印制电路板）、服务器/液冷为三条核心主线</span>
+              </div>
+              <div class="action-item">
+                <span class="action-icon">🚀</span>
+                <span><span class="institution-label" style="background:#e8f0fe;color:#1a56db;">开源证券</span>AI基础设施投入超预期，全球算力资本开支2026年或超1.5万亿美元，国内受益链明确</span>
+              </div>
+              <div class="action-item">
+                <span class="action-icon">📊</span>
+                <span><span class="institution-label" style="background:#e6f4ea;color:#1a7a3d;">国家能源局</span>一季度互联网数据服务业用电量同比+44%，AI驱动算力需求已成为新一轮电力增长核心驱动</span>
+              </div>
+            </div>
+          </div>
+          <div class="module-box module-tips">
+            <div class="module-header">
+              <div class="module-icon">💬</div>
+              <span class="module-title">客户谈资</span>
+              <span class="module-num">④</span>
+            </div>
+            <div class="tip-list">
+              <div class="tip-item">
+                <div class="tip-bullet">1</div>
+                <span>谷歌明天开AI大会，这是全球科技圈最重要的事件之一，会发布新一代芯片，算力革命在加速，相关国内企业的机会也在放大。</span>
+              </div>
+              <div class="tip-item">
+                <div class="tip-bullet">2</div>
+                <span>深证成指今天创了4年新高，说明科技成长股的估值修复行情很扎实，市场在给AI产业链持续定价。</span>
+              </div>
+              <div class="tip-item">
+                <div class="tip-bullet">3</div>
+                <span>如果您对科技方向有兴趣，可以关注科技类基金或ETF，比买单股的风险要分散很多，更适合普通投资者。</span>
+              </div>
+            </div>
+            <div class="tip-caution">
+              ⚠️ <span>科技板块波动较大，需结合客户风险承受能力，不得渲染短期暴利，要强调长期布局逻辑</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────── 地缘·大宗 ─────── -->
+  <div id="sec-global" class="section-wrapper">
+    <div class="section-header">
+      <div class="section-title">
+        <div class="section-icon" style="background:#fff3e0;">⚡</div>
+        <div>
+          <h2>地缘局势 · 大宗商品</h2>
+          <div class="section-desc">霍尔木兹博弈阶段缓和，油价高位回调，但不确定性仍存</div>
+        </div>
+      </div>
+      <span class="section-badge" style="background:#fff3e0;color:#e65100;">⚠️ 持续关注</span>
+    </div>
+
+    <div class="topic-card">
+      <div class="card-strip" style="background:linear-gradient(90deg,#ff9800,#f44336);"></div>
+      <div class="card-body">
+        <div class="card-title-row">
+          <div class="card-num" style="background:linear-gradient(135deg,#ff9800,#e65100);">03</div>
+          <div class="card-title-info">
+            <h3>中东局势阶段缓和，布油回落至$96.8，美伊谈判推进中，工业金属震荡偏强</h3>
+            <div class="card-tags">
+              <span class="tag" style="background:#fff3e0;color:#e65100;">地缘风险</span>
+              <span class="tag" style="background:#fce8e6;color:#c0392b;">油价</span>
+              <span class="tag" style="background:#e8f5e9;color:#1a7a3d;">工业金属</span>
+            </div>
+          </div>
+        </div>
+        <div class="modules-grid">
+          <div class="module-box module-news">
+            <div class="module-header">
+              <div class="module-icon">📰</div>
+              <span class="module-title">消息摘要</span>
+              <span class="module-num">①</span>
+            </div>
+            <div class="news-summary">
+              上周霍尔木兹海峡紧张局势出现边际缓和，美伊谈判继续推进，布伦特原油从上周峰值$99.36回落至<strong>$96.8</strong>，但中东局势仍未彻底平息，IEA提示如局势恶化油价或重返$100+。<br><br>
+              工业金属方面，伦铜维持高位$13,000+，工业金属板块整体震荡偏强，国内稀有金属板块今日有所活跃。A股煤炭板块有所回调，能源结构转型逻辑仍在。
+            </div>
+            <div class="news-highlight">
+              💡 关键：油价高位震荡格局短期难改，输入性通胀压力仍存，资产配置需考虑大宗商品波动
+            </div>
+          </div>
+          <div class="module-box module-metrics">
+            <div class="module-header">
+              <div class="module-icon">📊</div>
+              <span class="module-title">关键指标</span>
+              <span class="module-num">②</span>
+            </div>
+            <div class="metrics-list">
+              <div class="metric-item">
+                <span class="metric-name">布伦特原油</span>
+                <span class="metric-val val-down">$96.8/桶</span>
+                <span class="metric-chg chg-down">-2.6%</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-name">上周峰值</span>
+                <span class="metric-val val-up">$99.36/桶</span>
+                <span class="metric-chg chg-up">高位回落</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-name">伦铜</span>
+                <span class="metric-val val-up">$13,000+</span>
+                <span class="metric-chg chg-up">维持高位</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-name">稀有金属A股</span>
+                <span class="metric-val val-up">活跃</span>
+                <span class="metric-chg chg-up">今日上涨</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-name">A股煤炭板块</span>
+                <span class="metric-val val-down">回调</span>
+                <span class="metric-chg chg-down">今日偏弱</span>
+              </div>
+            </div>
+          </div>
+          <div class="module-box module-analysis">
+            <div class="module-header">
+              <div class="module-icon">🏦</div>
+              <span class="module-title">专业分析</span>
+              <span class="module-num">③</span>
+            </div>
+            <div class="analysis-content">地缘风险边际缓和但结构性问题未解，机构维持谨慎态度：</div>
+            <div class="analysis-actions">
+              <div class="action-item">
+                <span class="action-icon">🛢️</span>
+                <span><span class="institution-label" style="background:#fce8e6;color:#c0392b;">瑞银证券</span>指出中国对石油天然气依赖度在全球主要经济体中较低，油价冲击相对可控，A股影响有限</span>
+              </div>
+              <div class="action-item">
+                <span class="action-icon">🏛️</span>
+                <span><span class="institution-label" style="background:#e8f0fe;color:#1a56db;">中信建投</span>持续关注战略金属和有色板块，供给收缩+需求侧AI驱动，铜铝等仍有结构性机会</span>
+              </div>
+              <div class="action-item">
+                <span class="action-icon">⚡</span>
+                <span><span class="institution-label" style="background:#e8f5e9;color:#1a7a3d;">IEA</span>最新报告：如局势持续，布油或重新考验$100，建议关注能源资产对冲价值</span>
+              </div>
+            </div>
+          </div>
+          <div class="module-box module-tips">
+            <div class="module-header">
+              <div class="module-icon">💬</div>
+              <span class="module-title">客户谈资</span>
+              <span class="module-num">④</span>
+            </div>
+            <div class="tip-list">
+              <div class="tip-item">
+                <div class="tip-bullet">1</div>
+                <span>中东局势比上周好一点，油价从99美元回落到了97左右，但还是在高位，这种不确定性对全球市场都会有影响，值得持续观察。</span>
+              </div>
+              <div class="tip-item">
+                <div class="tip-bullet">2</div>
+                <span>分析师说中国对石油依赖相对较低，所以A股受油价冲击比欧美小，这也是我们国内新能源替代战略的一个成果。</span>
+              </div>
+              <div class="tip-item">
+                <div class="tip-bullet">3</div>
+                <span>铜价持续在高位，说明全球工业需求还是挺强的，有色金属的配置逻辑在AI和新能源的双重驱动下依然成立。</span>
+              </div>
+            </div>
+            <div class="tip-caution">
+              ⚠️ <span>地缘话题仅围绕经济影响展开，避免政治评判，保持客观中立立场</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────── 楼市·地产 ─────── -->
+  <div id="sec-realestate" class="section-wrapper">
+    <div class="section-header">
+      <div class="section-title">
+        <div class="section-icon" style="background:#f3e8ff;">🏠</div>
+        <div>
+          <h2>楼市 · 地产</h2>
+          <div class="section-desc">LPR连续11个月不变，按揭成本低位稳定，楼市小阳春信心持续</div>
+        </div>
+      </div>
+      <span class="section-badge" style="background:#f3e8ff;color:#7b1fa2;">📉 低利率窗口</span>
+    </div>
+
+    <div class="topic-card">
+      <div class="card-strip" style="background:linear-gradient(90deg,#9c27b0,#e91e63);"></div>
+      <div class="card-body">
+        <div class="card-title-row">
+          <div class="card-num" style="background:linear-gradient(135deg,#9c27b0,#6a1b9a);">04</div>
+          <div class="card-title-info">
+            <h3>LPR第11次维持不变，5年期3.5%历史低位，分析师预判下半年降息窗口，楼市信心修复延续</h3>
+            <div class="card-tags">
+              <span class="tag" style="background:#f3e8ff;color:#7b1fa2;">LPR政策</span>
+              <span class="tag" style="background:#e8f0fe;color:#1a56db;">按揭利率</span>
+              <span class="tag" style="background:#e6f4ea;color:#1a7a3d;">楼市复苏</span>
+            </div>
+          </div>
+        </div>
+        <div class="modules-grid">
+          <div class="module-box module-news">
+            <div class="module-header">
+              <div class="module-icon">📰</div>
+              <span class="module-title">消息摘要</span>
+              <span class="module-num">①</span>
+            </div>
+            <div class="news-summary">
+              中国人民银行4月20日公布：<strong>1年期LPR报3.0%，5年期以上LPR报3.5%，均维持不变</strong>，这是LPR连续11个月按兵不动。<br><br>
+              东方金诚首席宏观分析师王青指出：年初出口超预期、GDP达5%，降息迫切性下降；但预计<strong>下半年若通胀走软，降息窗口有望开启</strong>。5年期LPR维持3.5%历史低位，对住房贷款持续利好。
+            </div>
+            <div class="news-highlight">
+              💡 关键：LPR低位稳定=按揭红利持续，有购房需求的客户现在锁定贷款成本仍属有利时机
+            </div>
+          </div>
+          <div class="module-box module-metrics">
+            <div class="module-header">
+              <div class="module-icon">📊</div>
+              <span class="module-title">关键指标</span>
+              <span class="module-num">②</span>
+            </div>
+            <div class="metrics-list">
+              <div class="metric-item">
+                <span class="metric-name">5年期以上LPR</span>
+                <span class="metric-val val-neutral">3.5%</span>
+                <span class="metric-chg chg-neutral">历史低位</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-name">1年期LPR</span>
+                <span class="metric-val val-neutral">3.0%</span>
+                <span class="metric-chg chg-neutral">连续11月</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-name">下半年降息预期</span>
+                <span class="metric-val val-down">有空间</span>
+                <span class="metric-chg chg-down">机构预判</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-name">北京二手房(4月上旬)</span>
+                <span class="metric-val val-up">成交回暖</span>
+                <span class="metric-chg chg-up">小阳春延续</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-name">A股地产板块</span>
+                <span class="metric-val val-neutral">震荡整理</span>
+                <span class="metric-chg chg-neutral">观望为主</span>
+              </div>
+            </div>
+          </div>
+          <div class="module-box module-analysis">
+            <div class="module-header">
+              <div class="module-icon">🏦</div>
+              <span class="module-title">专业分析</span>
+              <span class="module-num">③</span>
+            </div>
+            <div class="analysis-content">LPR稳定+经济良好开局，机构对楼市看法趋于中性偏多：</div>
+            <div class="analysis-actions">
+              <div class="action-item">
+                <span class="action-icon">🏠</span>
+                <span><span class="institution-label" style="background:#f3e8ff;color:#7b1fa2;">东方金诚</span>LPR维持背后是经济扎实，下半年若外需走弱或降息，届时按揭利率或进一步下行</span>
+              </div>
+              <div class="action-item">
+                <span class="action-icon">💰</span>
+                <span><span class="institution-label" style="background:#e8f0fe;color:#1a56db;">中银国际</span>政策端持续托底，一线城市基本面改善明显，关注有资金实力的央企地产龙头</span>
+              </div>
+              <div class="action-item">
+                <span class="action-icon">🏦</span>
+                <span><span class="institution-label" style="background:#e6f4ea;color:#1a7a3d;">银行业</span>低利率环境下住房按揭需求回暖，银行零售端收益有所承压但资产质量改善</span>
+              </div>
+            </div>
+          </div>
+          <div class="module-box module-tips">
+            <div class="module-header">
+              <div class="module-icon">💬</div>
+              <span class="module-title">客户谈资</span>
+              <span class="module-num">④</span>
+            </div>
+            <div class="tip-list">
+              <div class="tip-item">
+                <div class="tip-bullet">1</div>
+                <span>今天LPR公布，继续维持不变，5年期还是3.5%，这是过去几年里很低的水平，对有买房贷款需求的客户来说是个好时机。</span>
+              </div>
+              <div class="tip-item">
+                <div class="tip-bullet">2</div>
+                <span>分析师预计下半年还有降息可能，现在提前锁定利率或规划好还款计划，是比较稳健的做法。</span>
+              </div>
+              <div class="tip-item">
+                <div class="tip-bullet">3</div>
+                <span>楼市小阳春的信心还在，一线城市成交量维持不错水平，政策也在持续托底，有换房或购房计划的客户可以适时行动。</span>
+              </div>
+            </div>
+            <div class="tip-caution">
+              ⚠️ <span>楼市话题需了解客户购房意愿和资金状况再深入，不得诱导客户盲目加杠杆</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────── 消费·电力 ─────── -->
+  <div id="sec-consumer" class="section-wrapper">
+    <div class="section-header">
+      <div class="section-title">
+        <div class="section-icon" style="background:#fff9c4;">🛍️</div>
+        <div>
+          <h2>消费内需 · 电力景气</h2>
+          <div class="section-desc">一季度全社会用电量增5.2%，AI数据中心用电激增44%，电力板块领涨</div>
+        </div>
+      </div>
+      <span class="section-badge" style="background:#fff9c4;color:#f57f17;">⚡ 景气度高</span>
+    </div>
+
+    <div class="topic-card">
+      <div class="card-strip" style="background:linear-gradient(90deg,#ffc107,#ff9800);"></div>
+      <div class="card-body">
+        <div class="card-title-row">
+          <div class="card-num" style="background:linear-gradient(135deg,#ffc107,#e65100); color:#fff;">05</div>
+          <div class="card-title-info">
+            <h3>Q1全社会用电量+5.2%，AI数据中心用电量同比+44%，电力板块成今日A股亮点之一</h3>
+            <div class="card-tags">
+              <span class="tag" style="background:#fff9c4;color:#f57f17;">电力</span>
+              <span class="tag" style="background:#e0f7fa;color:#006d77;">AI数据中心</span>
+              <span class="tag" style="background:#e6f4ea;color:#1a7a3d;">消费复苏</span>
+            </div>
+          </div>
+        </div>
+        <div class="modules-grid">
+          <div class="module-box module-news">
+            <div class="module-header">
+              <div class="module-icon">📰</div>
+              <span class="module-title">消息摘要</span>
+              <span class="module-num">①</span>
+            </div>
+            <div class="news-summary">
+              国家能源局4月20日发布数据：<strong>2026年一季度全社会用电量累计25141亿千瓦时，同比增长5.2%</strong>。其中，高技术及装备制造业用电+8.6%，第三产业用电+8.1%，<strong>互联网数据服务业用电量229亿千瓦时，同比激增44.0%</strong>。<br><br>
+              今日A股电力板块走强，前3月用电量数据公布后<strong>华电辽能等多股涨停</strong>，绿电、核电相关个股亦有所表现。充换电服务业用电量+53.8%，新能源汽车渗透加速。
+            </div>
+            <div class="news-highlight">
+              💡 关键：AI算力+新能源汽车是用电增长的双引擎，电力是"经济晴雨表"，数据映射实体景气度
+            </div>
+          </div>
+          <div class="module-box module-metrics">
+            <div class="module-header">
+              <div class="module-icon">📊</div>
+              <span class="module-title">关键指标</span>
+              <span class="module-num">②</span>
+            </div>
+            <div class="metrics-list">
+              <div class="metric-item">
+                <span class="metric-name">Q1全社会用电量</span>
+                <span class="metric-val val-up">25141亿度</span>
+                <span class="metric-chg chg-up">+5.2%</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-name">互联网数据服务业</span>
+                <span class="metric-val val-up">+44.0%</span>
+                <span class="metric-chg chg-up">AI驱动</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-name">充换电服务业</span>
+                <span class="metric-val val-up">+53.8%</span>
+                <span class="metric-chg chg-up">新能源车</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-name">高技术制造业</span>
+                <span class="metric-val val-up">+8.6%</span>
+                <span class="metric-chg chg-up">新质生产力</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-name">华电辽能</span>
+                <span class="metric-val val-up">涨停</span>
+                <span class="metric-chg chg-up">电力领涨</span>
+              </div>
+            </div>
+          </div>
+          <div class="module-box module-analysis">
+            <div class="module-header">
+              <div class="module-icon">🏦</div>
+              <span class="module-title">专业分析</span>
+              <span class="module-num">③</span>
+            </div>
+            <div class="analysis-content">电力景气周期进入上升通道，机构将其列为2026年最强主线之一：</div>
+            <div class="analysis-actions">
+              <div class="action-item">
+                <span class="action-icon">⚡</span>
+                <span><span class="institution-label" style="background:#fff9c4;color:#f57f17;">雪球分析</span>电力是2026年最强主线之一，政策+业绩双轮驱动；AI数据中心需求爆发是最大增量</span>
+              </div>
+              <div class="action-item">
+                <span class="action-icon">🔋</span>
+                <span><span class="institution-label" style="background:#e8f0fe;color:#1a56db;">平安证券</span>充换电+新能源渗透率持续提升，绿电转型加速，关注绿电/核电/储能三条配套主线</span>
+              </div>
+              <div class="action-item">
+                <span class="action-icon">📦</span>
+                <span><span class="institution-label" style="background:#e6f4ea;color:#1a7a3d;">国家能源局</span>数据显示3月全社会用电量同比+3.5%，季末冲高后回归常态，全年增速预计5%+</span>
+              </div>
+            </div>
+          </div>
+          <div class="module-box module-tips">
+            <div class="module-header">
+              <div class="module-icon">💬</div>
+              <span class="module-title">客户谈资</span>
+              <span class="module-num">④</span>
+            </div>
+            <div class="tip-list">
+              <div class="tip-item">
+                <div class="tip-bullet">1</div>
+                <span>今天有个数据很有意思——AI数据中心一个季度的用电量增长了44%，这说明AI不只是概念，它的算力需求是真实的，在持续快速扩大。</span>
+              </div>
+              <div class="tip-item">
+                <div class="tip-bullet">2</div>
+                <span>电力是经济的"晴雨表"，用电量涨说明工厂在开工、车在跑、服务器在跑，经济活力在恢复，这个数据比很多统计更直观。</span>
+              </div>
+              <div class="tip-item">
+                <div class="tip-bullet">3</div>
+                <span>新能源充换电用电增长了54%，说明电动车已经真正走入千家万户，这个趋势很难逆转，相关资产的长期配置价值是清晰的。</span>
+              </div>
+            </div>
+            <div class="tip-caution">
+              ⚠️ <span>电力和新能源话题接地气，适合从日常生活切入，引导客户理解实体经济与投资的关联</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>📅 本板内容来源于公开市场信息 &nbsp;|&nbsp; 更新时间：2026年4月21日 08:00（V1.1）&nbsp;|&nbsp; 仅供内部参考，不构成投资建议</div>
+    <div class="footer-disclaimer">⚠️ 投资有风险，与客户沟通时请遵守合规要求，不得承诺收益</div>
+  </div>
+</footer>
+
+<script>
+  function showSection(name, el) {
+    document.querySelectorAll('.section-wrapper').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('sec-' + name).classList.add('active');
+    if (el) el.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return false;
+  }
+</script>
+</body>
+</html>
