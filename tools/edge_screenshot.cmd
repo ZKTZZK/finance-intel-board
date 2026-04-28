@@ -1,0 +1,1 @@
+"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --headless=new --screenshot="D:\WorkBuddy_WorkSpace\Finance_IntelBoard\assets\images\snappy_edge.png" --window-size=540,2000 --virtual-time-budget=8000 --disable-gpu --no-sandbox "file:///D:/WorkBuddy_WorkSpace/Finance_IntelBoard/assets/images/snappy_20260428.html"
