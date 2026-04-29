@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>每日经济热点案例展示板 · 2026年4月28日 · V1.2</title>
+  <title>每日经济热点案例展示板 · 2026年4月29日 · V1.3</title>
   <style>
     :root {
       --primary: #1a2942;
@@ -107,7 +107,7 @@
     .ticker-chg { font-size: 11px; font-weight: 600; }
     .up { color: var(--red); }
     .down { color: var(--green); }
-    .neutral { color: rgba(255,255,255,0.6); }
+    .neutral { color: #5a6a80; }
     .sep { width: 1px; height: 16px; background: rgba(255,255,255,0.1); }
 
     /* ─── NAV TABS ─── */
@@ -527,8 +527,8 @@
       </div>
     </div>
     <div class="header-meta">
-      <span class="version-badge">V 1.2</span>
-      <div class="date-badge">📅 2026年4月28日 &nbsp;|&nbsp; 周二</div>
+      <span class="version-badge">V1.3</span>
+      <div class="date-badge">📅 2026年4月29日 &nbsp;|&nbsp; 周三</div>
       <div class="market-status">
         <div class="status-dot"></div>
         <span class="status-text">今日数据</span>
@@ -599,6 +599,7 @@
     <a class="nav-tab" href="#" onclick="return showSection('global',this)"><span class="tab-icon">⚡</span> 地缘·大宗</a>
     <a class="nav-tab" href="#" onclick="return showSection('realestate',this)"><span class="tab-icon">🏠</span> 楼市·地产</a>
     <a class="nav-tab" href="#" onclick="return showSection('consumer',this)"><span class="tab-icon">🛍️</span> 消费·电力</a>
+    <a class="nav-tab" href="#" onclick="return showSection('finance',this)"><span class="tab-icon">🌍</span> 国际·金融</a>
   </div>
 </nav>
 
@@ -614,7 +615,7 @@
         <div class="section-icon" style="background:linear-gradient(135deg,#c8102e,#ff6b35);">⚡</div>
         <div>
           <h2>一图看懂 · 今日5大热点</h2>
-          <div class="section-desc">2026年4月28日 · 08:00更新 · 30秒掌握今日谈资</div>
+          <div class="section-desc">2026年4月29日 · 08:00更新 · 30秒掌握今日谈资</div>
         </div>
       </div>
       <span class="section-badge" style="background:#fce8e6;color:#c0392b;">📱 手机优先</span>
@@ -644,23 +645,23 @@
       <div class="quick-market">
         <div class="qm-item">
           <div class="qm-name">沪指</div>
-          <div class="qm-val down">4082</div>
-          <div class="qm-chg down">▼ -0.47%</div>
+          <div class="qm-val down">4078</div>
+          <div class="qm-chg down">▼ -0.19%</div>
         </div>
         <div class="qm-item">
           <div class="qm-name">创业板</div>
-          <div class="qm-val down">3688</div>
-          <div class="qm-chg down">▼ -0.64%</div>
+          <div class="qm-val down">3596</div>
+          <div class="qm-chg down">▼ -1.43%</div>
         </div>
         <div class="qm-item">
           <div class="qm-name">科创50</div>
-          <div class="qm-val up">1533</div>
-          <div class="qm-chg up">▲ +3.76%</div>
+          <div class="qm-val down">1875</div>
+          <div class="qm-chg down">▼ -1.36%</div>
         </div>
         <div class="qm-item">
           <div class="qm-name">原油</div>
-          <div class="qm-val up">$97+</div>
-          <div class="qm-chg up">▲ 中东风险</div>
+          <div class="qm-val up">$99.9</div>
+          <div class="qm-chg up">▲ +3.69%</div>
         </div>
         <div class="qm-item">
           <div class="qm-name">LPR 5Y</div>
@@ -681,20 +682,20 @@
               <span class="hc-domain" style="background:#e8f0fe;color:#1a56db;">🌐 宏观·政策</span>
               <span class="hc-importance" style="background:#fce8e6;color:#c0392b;">🔴 重磅</span>
             </div>
-            <div class="hc-headline">企业国有资产法修订草案首次提请审议，国资改革步入新阶段；英伟达市值突破5.17万亿美元，科创50大涨3.76%</div>
+            <div class="hc-headline">中央政治局召开会议分析当前经济形势；A股有望延续"慢牛"格局，上证指数最高或触及4500点</div>
             <div class="hc-metrics">
               <div class="hc-metric">
-                <div class="hc-metric-val up">+3.76%</div>
-                <div class="hc-metric-label">科创50（昨日收盘）</div>
+                <div class="hc-metric-val down">-1.36%</div>
+                <div class="hc-metric-label">科创50（今日收盘）</div>
               </div>
               <div class="hc-metric">
-                <div class="hc-metric-val" style="color:#4285f4;">$5.17万亿</div>
-                <div class="hc-metric-label">英伟达市值（昨夜美股）</div>
+                <div class="hc-metric-val" style="color:#4285f4;">4500点</div>
+                <div class="hc-metric-label">上证指数目标位（机构预测）</div>
               </div>
             </div>
             <div class="hc-quote">
               <span class="hc-quote-icon">💬</span>
-              <span>"国资法14年来首次修订，说明国企改革在深化，这是制度层面的重要信号；英伟达昨晚又创新高，全球AI算力赛道逻辑依然强劲。"</span>
+              <span>"政治局会议分析经济形势，释放稳增长信号；《中国投资发展报告》预测A股全年或涨10%以上，上证有望触及4500点。"</span>
             </div>
             <div class="hc-footer">
               <span class="hc-detail-btn">详细分析 →</span>
@@ -711,20 +712,20 @@
               <span class="hc-domain" style="background:#fff3e0;color:#e65100;">⚡ 地缘·大宗</span>
               <span class="hc-importance" style="background:#fff3e0;color:#e65100;">⚠️ 风险</span>
             </div>
-            <div class="hc-headline">美伊谈判陷入僵局，伊朗暂停钢铁出口至5月底；WTI原油突破$97两年来新高，黄金失守$4690关键支撑</div>
+            <div class="hc-headline">霍尔木兹海峡通行量骤降95.3%，WTI原油触及$99.93创两年新高，世界银行警告能源价格将暴涨24%</div>
             <div class="hc-metrics">
               <div class="hc-metric">
-                <div class="hc-metric-val up">$97+</div>
-                <div class="hc-metric-label">WTI原油（今日突破）</div>
+                <div class="hc-metric-val up">$99.9</div>
+                <div class="hc-metric-label">WTI原油（今日收盘+3.69%）</div>
               </div>
               <div class="hc-metric">
-                <div class="hc-metric-val down">$4680</div>
-                <div class="hc-metric-label">现货黄金（关键支撑失守）</div>
+                <div class="hc-metric-val up">24%</div>
+                <div class="hc-metric-label">世界银行预测能源涨幅</div>
               </div>
             </div>
             <div class="hc-quote">
               <span class="hc-quote-icon">💬</span>
-              <span>"美伊谈崩了，油价应声涨到97美元以上，黄金反而在美元走强下失守4690——这两个商品同时异动，说明市场在重新定价地缘风险。"</span>
+              <span>"霍尔木兹海峡通行量下降95.3%，全球食品价格上涨6%，中东局势高危僵持——WTI原油已触及99美元，世界银行警告能源价格将创四年来最大涨幅。"</span>
             </div>
             <div class="hc-footer">
               <span class="hc-detail-btn">详细分析 →</span>
@@ -741,20 +742,20 @@
               <span class="hc-domain" style="background:#f3e8ff;color:#7b1fa2;">🏠 楼市·地产</span>
               <span class="hc-importance" style="background:#e6f4ea;color:#1a7a3d;">🟢 拐点</span>
             </div>
-            <div class="hc-headline">4月楼市历史性拐点：现房销售制度全面落地+土地供给端收紧并行，核心城市成交量逆势爆发</div>
+            <div class="hc-headline">住建部部署2026年房地产走向：现房销售制度全国推行，政策从"推动止跌"转向"着力稳定"</div>
             <div class="hc-metrics">
               <div class="hc-metric">
-                <div class="hc-metric-val up">万套+</div>
-                <div class="hc-metric-label">广州3月二手房成交（近3年新高）</div>
+                <div class="hc-metric-val" style="color:#9c27b0;">结构性</div>
+                <div class="hc-metric-label">住建部定调2026年楼市走向</div>
               </div>
               <div class="hc-metric">
-                <div class="hc-metric-val" style="color:#9c27b0;">4月1日</div>
-                <div class="hc-metric-label">现房销售制度全国正式执行</div>
+                <div class="hc-metric-val up">3.1万套</div>
+                <div class="hc-metric-label">上海3月二手房成交（近5年新高）</div>
               </div>
             </div>
             <div class="hc-quote">
               <span class="hc-quote-icon">💬</span>
-              <span>"4月是楼市的分水岭——预售制30年来头一回动真格，土地供应端也在收严，核心城市的小阳春不是偶然，背后是制度变革在驱动。"</span>
+              <span>"政治局会议从'推动止跌'变为'着力稳定'，意味着政策重心转向巩固'稳'的态势；上海二手房成交创五年新高，说明市场信心在逐步恢复。"</span>
             </div>
             <div class="hc-footer">
               <span class="hc-detail-btn">详细分析 →</span>
@@ -771,20 +772,50 @@
               <span class="hc-domain" style="background:#fff9c4;color:#f57f17;">🛍️ 消费·电力</span>
               <span class="hc-importance" style="background:#e8f0fe;color:#1a56db;">📊 数据</span>
             </div>
-            <div class="hc-headline">4月乘用车零售预计142万辆，新能源渗透率突破60%；国家能源局召开Q1发布会，绿电直连政策加速推进</div>
+            <div class="hc-headline">一季度全国城镇人均可支配收入同比+6.2%，"长收短付"乱象监管加强，新能源车4月渗透率或破65%</div>
             <div class="hc-metrics">
               <div class="hc-metric">
-                <div class="hc-metric-val up">60%+</div>
-                <div class="hc-metric-label">4月新能源渗透率（预计）</div>
+                <div class="hc-metric-val up">+6.2%</div>
+                <div class="hc-metric-label">Q1城镇人均可支配收入增速</div>
               </div>
               <div class="hc-metric">
-                <div class="hc-metric-val up">+2.4%</div>
-                <div class="hc-metric-label">Q1社会消费品零售同比</div>
+                <div class="hc-metric-val up">65%+</div>
+                <div class="hc-metric-label">4月新能源渗透率（预测）</div>
               </div>
             </div>
             <div class="hc-quote">
               <span class="hc-quote-icon">💬</span>
-              <span>"新能源渗透率正式突破六成，意味着马路上每10辆车有6辆是电动车，这个速度比所有人预期的都快；能源局也在推进绿电直连，数据中心可以直接买绿电了。"</span>
+              <span>"收入增长+消费升级，新能源车4月渗透率有望破65%，每10辆车有6辆是电动车已不远；'长收短付'监管也在规范租赁市场，保障租客权益。"</span>
+            </div>
+            <div class="hc-footer">
+              <span class="hc-detail-btn">详细分析 →</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 热点 ⑤ 国际·金融 -->
+        <div class="hot-card" onclick="return showSection('finance', document.querySelectorAll('.nav-tab')[5])">
+          <div class="hc-strip" style="background:#00897b;"></div>
+          <div class="hc-body">
+            <div class="hc-top">
+              <div class="hc-num" style="background:#00897b;">⑤</div>
+              <span class="hc-domain" style="background:#e0f2f1;color:#00695c;">🌍 国际·金融</span>
+              <span class="hc-importance" style="background:#e8f0fe;color:#1a56db;">📊 数据</span>
+            </div>
+            <div class="hc-headline">人民币中间价升至6.8579创两年新高，美联储本周利率决议维持不变概率100%，美元指数回落</div>
+            <div class="hc-metrics">
+              <div class="hc-metric">
+                <div class="hc-metric-val" style="color:#00897b;">6.8579</div>
+                <div class="hc-metric-label">人民币兑美元中间价（近3年最高）</div>
+              </div>
+              <div class="hc-metric">
+                <div class="hc-metric-val up">100%</div>
+                <div class="hc-metric-label">美联储本周维持利率不变概率</div>
+              </div>
+            </div>
+            <div class="hc-quote">
+              <span class="hc-quote-icon">💬</span>
+              <span>"人民币升值至2023年3月以来最高，美联储本周100%维持利率不变；人民币资产吸引力提升，出口企业需关注汇率波动风险。"</span>
             </div>
             <div class="hc-footer">
               <span class="hc-detail-btn">详细分析 →</span>
@@ -800,7 +831,7 @@
         <div class="as-grid">
           <div class="as-item">
             <div class="as-item-label">✅ 适合话题</div>
-            <div class="as-item-content">国资法修订改革信号 / 科创50科技主线 / 楼市拐点制度变革 / 新能源渗透率突破六成</div>
+            <div class="as-item-content">政治局会议稳增长信号 / A股"慢牛"预期4500点 / 楼市政策"着力稳定" / 原油冲击$100 / 人民币升至6.85</div>
           </div>
           <div class="as-item">
             <div class="as-item-label">⚠️ 谨慎话题</div>
@@ -1356,12 +1387,166 @@
     </div>
   </div>
 
+  <!-- ─────── 国际·金融 ─────── -->
+  <div id="sec-finance" class="section-wrapper">
+    <div class="section-header">
+      <div class="section-title">
+        <div class="section-icon" style="background:#e0f2f1;">🌍</div>
+        <div>
+          <h2>国际局势 · 金融市场</h2>
+          <div class="section-desc">人民币中间价升至6.8579创两年新高，美联储本周利率决议100%维持不变</div>
+        </div>
+      </div>
+      <span class="section-badge" style="background:#e0f2f1;color:#00695c;">📊 汇率焦点</span>
+    </div>
+
+    <div class="summary-panel">
+      <div class="summary-title">📈 今日国际金融核心指标</div>
+      <div class="summary-grid">
+        <div class="summary-item">
+          <div class="label">人民币中间价</div>
+          <div class="value" style="color:#69db7c;">6.8579</div>
+          <div class="detail" style="color:rgba(255,255,255,0.6);">近3年最高，升值</div>
+        </div>
+        <div class="summary-item">
+          <div class="label">美联储利率</div>
+          <div class="value" style="color:#ffd700;">5.25-5.50%</div>
+          <div class="detail" style="color:rgba(255,255,255,0.6);">本周100%维持不变</div>
+        </div>
+        <div class="summary-item">
+          <div class="label">美元指数</div>
+          <div class="value" style="color:#ff6b6b;">回落中</div>
+          <div class="detail" style="color:rgba(255,255,255,0.6);">支撑位附近震荡</div>
+        </div>
+        <div class="summary-item">
+          <div class="label">黄金</div>
+          <div class="value" style="color:#ff6b6b;">$4680</div>
+          <div class="detail" style="color:rgba(255,255,255,0.6);">跌破$4690支撑</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <div class="card-strip" style="background:linear-gradient(90deg,#00897b,#00695c);"></div>
+      <div class="card-body">
+        <div class="card-title-row">
+          <div class="card-num" style="background:linear-gradient(135deg,#00897b,#004d40);">06</div>
+          <div class="card-title-info">
+            <h3>人民币中间价升至6.8579创两年新高，美联储本周利率决议维持不变概率100%，美元指数回落至支撑位</h3>
+            <div class="card-tags">
+              <span class="tag" style="background:#e0f2f1;color:#00695c;">人民币</span>
+              <span class="tag" style="background:#e8f0fe;color:#1a56db;">美联储</span>
+              <span class="tag" style="background:#fff3e0;color:#e65100;">美元指数</span>
+            </div>
+          </div>
+        </div>
+        <div class="modules-grid">
+          <div class="module-box module-news">
+            <div class="module-header">
+              <div class="module-icon">📰</div>
+              <span class="module-title">消息摘要</span>
+              <span class="module-num">①</span>
+            </div>
+            <div class="news-summary">
+              人民币汇率持续走强，<strong>4月29日人民币兑美元中间价升至6.8579</strong>，创2023年3月以来近3年最高水平，本周累计升值约0.3%。<br><br>
+              美联储将于<strong>4月29-30日召开利率决议</strong>，据CME FedWatch工具显示，<strong>本周维持利率在5.25-5.50%不变的概率为100%</strong>。鲍威尔主席预计维持鸽派立场，强调等待更多通胀数据。美元指数回落至98.5附近，在关键支撑位震荡。<br><br>
+              人民币资产吸引力提升，外资持续流入中国债券市场，3月境外机构持有中国债券规模环比增长2.1%。
+            </div>
+            <div class="news-highlight">
+              💡 关键：人民币升至近3年最高+美联储按兵不动，人民币资产吸引力显著提升；出口企业需关注汇率波动风险，对冲需求增加
+            </div>
+          </div>
+          <div class="module-box module-metrics">
+            <div class="module-header">
+              <div class="module-icon">📊</div>
+              <span class="module-title">关键指标</span>
+              <span class="module-num">②</span>
+            </div>
+            <div class="metrics-list">
+              <div class="metric-item">
+                <span class="metric-name">人民币中间价</span>
+                <span class="metric-val val-up">6.8579</span>
+                <span class="metric-chg chg-up">近3年最高</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-name">美联储利率</span>
+                <span class="metric-val val-neutral">5.25-5.50%</span>
+                <span class="metric-chg chg-neutral">本周维持</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-name">美元指数</span>
+                <span class="metric-val val-down">~98.5</span>
+                <span class="metric-chg chg-down">支撑位震荡</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-name">现货黄金</span>
+                <span class="metric-val val-down">$4680</span>
+                <span class="metric-chg chg-down">跌破$4690</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-name">外资持有中债</span>
+                <span class="metric-val val-up">+2.1%</span>
+                <span class="metric-chg chg-up">3月环比</span>
+              </div>
+            </div>
+          </div>
+          <div class="module-box module-analysis">
+            <div class="module-header">
+              <div class="module-icon">🏦</div>
+              <span class="module-title">专业分析</span>
+              <span class="module-num">③</span>
+            </div>
+            <div class="analysis-content">人民币走强+美联储按兵不动，机构关注汇率与资产配置机会：</div>
+            <div class="analysis-actions">
+              <div class="action-item">
+                <span class="action-icon">💱</span>
+                <span><span class="institution-label" style="background:#e0f2f1;color:#00695c;">中国外汇交易中心</span>人民币升至6.8579，境内美元流动性宽松，短期人民币仍有小幅升值空间，但需关注央行调控信号</span>
+              </div>
+              <div class="action-item">
+                <span class="action-icon">🏛️</span>
+                <span><span class="institution-label" style="background:#e8f0fe;color:#1a56db;">高盛</span>美联储维持利率不变，美元或维持弱势；人民币资产吸引力增强，建议关注人民币债券和A股核心资产配置机会</span>
+              </div>
+              <div class="action-item">
+                <span class="action-icon">⚡</span>
+                <span><span class="institution-label" style="background:#fce8e6;color:#c0392b;">中信证券</span>人民币升值有利于A股流动性改善，外资持续流入；但出口企业需加强汇率对冲，警惕人民币过快升值影响出口竞争力</span>
+              </div>
+            </div>
+          </div>
+          <div class="module-box module-tips">
+            <div class="module-header">
+              <div class="module-icon">💬</div>
+              <span class="module-title">客户谈资</span>
+              <span class="module-num">④</span>
+            </div>
+            <div class="tip-list">
+              <div class="tip-item">
+                <div class="tip-bullet">1</div>
+                <span>人民币现在升到了6.85左右，是近3年最高的水平。这说明什么？资金在看好中国资产，愿意持有人民币资产——这对A股和债券市场都是利好。</span>
+              </div>
+              <div class="tip-item">
+                <div class="tip-bullet">2</div>
+                <span>美联储这周大概率不动利率，鲍威尔主席之前表态偏鸽派，说要等通胀数据。美元走弱对新兴市场是好事，资金会寻找更高收益的地方。</span>
+              </div>
+              <div class="tip-item">
+                <div class="tip-bullet">3</div>
+                <span>不过有一点要注意——人民币升值对出口企业有压力。如果您的客户是做出口贸易的，可能需要关注一下汇率风险对冲的方案。</span>
+              </div>
+            </div>
+            <div class="tip-caution">
+              ⚠️ <span>汇率话题专业性较强，建议结合客户实际需求（进口/出口/资产配置）切入，避免空谈汇率点位；不得为客户推荐外汇投机产品</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </main>
 
 <!-- ═══════════════ FOOTER ═══════════════ -->
 <footer class="footer">
   <div class="footer-inner">
-    <div>📅 本板内容来源于公开市场信息 &nbsp;|&nbsp; 更新时间：2026年4月28日 08:00（V1.2）&nbsp;|&nbsp; 仅供内部参考，不构成投资建议</div>
+    <div>📅 本板内容来源于公开市场信息 &nbsp;|&nbsp; 更新时间：2026年4月29日 08:00（V1.3）&nbsp;|&nbsp; 仅供内部参考，不构成投资建议</div>
     <div class="footer-disclaimer">⚠️ 投资有风险，与客户沟通时请遵守合规要求，不得承诺收益</div>
   </div>
 </footer>
