@@ -12,7 +12,7 @@ from PIL import Image
 from datetime import datetime
 
 # 配置
-HTML_PATH = r"D:\WorkBuddy_WorkSpace\Finance_IntelBoard\assets\images\snappy_v1.3_20260430.html"
+HTML_PATH = r"D:\WorkBuddy_WorkSpace\Finance_IntelBoard\assets\images\snappy_v1.3_20260506.html"
 OUTPUT_PATH = r"D:\WorkBuddy_WorkSpace\Finance_IntelBoard\assets\images"
 EDGE_PATH = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
 VIEWPORT_WIDTH = 550   # 比目标宽10px，留出滚动条区域
